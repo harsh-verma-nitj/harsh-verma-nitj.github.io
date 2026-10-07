@@ -10,6 +10,8 @@ The homepage displays Google Scholar, IRINS / Vidwan, ORCID, Scopus and Web of S
 
 The homepage requests that JSON from the repository's raw URL because a commit made with `GITHUB_TOKEN` does not trigger a branch-based GitHub Pages build. Its embedded HTML snapshot remains visible if JavaScript or the JSON request is unavailable. No Scholar credentials, proxy or browser scraping service is used. Google Scholar may restrict automated requests; failed refreshes are reported in the Actions run. GitHub may disable scheduled workflows after 60 days of repository inactivity; re-enable the schedule in Actions if needed.
 
+The initial hosted run on 7 October 2026 passed the integrity checks but received HTTP 403 from Google Scholar. The homepage retains the snapshot successfully fetched on that date; scheduled checks are configured, but successful unattended refreshes have not yet been demonstrated.
+
 Run the integrity checks with `python3 -m unittest discover -s tests -v` and refresh manually with `python3 scripts/update_scholar.py`.
 
 ## Publish on GitHub Pages
