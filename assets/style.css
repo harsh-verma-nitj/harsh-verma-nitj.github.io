@@ -34,3 +34,12 @@ body.dark{color-scheme:dark;--ink:#dbe5f3;--muted:#a7b5ca;--blue:#9bc5f1;--page:
 .scholar-updated{font-size:9px;color:var(--muted);margin:20px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:0 3px}
 .scholar-refresh{margin-left:auto;font-size:9px;letter-spacing:.02em}
 @media(max-width:420px){.scholar-surface{padding:22px}.citation-chart{gap:5px}.scholar-surface h2{font-size:21px}}
+
+/* Keep research themes below About, beside the Scholar panel. */
+.home-overview{display:flex;flex-direction:column;gap:26px;min-width:0}
+.home-overview .home-section{margin-top:0}
+.home-overview .theme-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.home-overview .section-top{flex-wrap:wrap;align-items:start;gap:12px}
+.home-overview .section-top h2{font-size:23px}
+.home-overview .theme-card{padding:20px 16px}
+@media(max-width:600px){.home-overview .theme-grid{grid-template-columns:1fr}.home-overview .theme-card{padding:20px}.home-overview .theme-card p{font-size:11px}}
