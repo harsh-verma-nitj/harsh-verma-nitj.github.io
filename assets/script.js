@@ -36,7 +36,7 @@
 
   const search = document.getElementById('publication-search');
   if (search) {
-    const items = Array.from(document.querySelectorAll('.publication'));
+    const items = Array.from(document.querySelectorAll('#publication-list .publication'));
     const yearFilter = document.getElementById('publication-year');
     const typeFilter = document.getElementById('publication-type');
     const count = document.getElementById('publication-count');
