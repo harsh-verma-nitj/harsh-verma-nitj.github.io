@@ -15,9 +15,15 @@ The site files are in the repository root. To enable publishing:
 
 Changes committed to `main` are then published automatically. No build command or external hosting is required.
 
+## Design and navigation
+
+The site uses a navy profile header, compact overview cards and seven static pages: Home, Experience, Research, Publications, Supervision, Recognition and Contact. It supports mobile navigation and a user-selectable dark theme. All supplied academic records remain on their relevant pages. Old homepage section anchors redirect to the corresponding page.
+
 ## Profile photo
 
-The current page references a public profile photograph remotely and automatically falls back to an HKV monogram if it cannot load. For a durable official site, save the preferred photograph as `assets/profile.jpg` and replace the `src` of the portrait image in `index.html` with `assets/profile.jpg`.
+The portrait is stored locally at `assets/profile.jpg`. It is the official NITJ faculty photograph, downloaded from https://www.nitj.ac.in/images/faculty/16081670370.jpg (894 × 1146 pixels). The website uses CSS to display it without altering the photograph. This replaces the former 128 × 128 remotely linked thumbnail.
+
+The official CSE profile data also supplies the Google Scholar identifier and the MS (Software Systems, BITS Pilani, 1998) and BE (Computer Science and Engineering, Gulbarga University, 1993) qualifications.
 
 ## Main sources used
 
@@ -48,3 +54,5 @@ Correction sources:
 - https://www.sciencedirect.com/science/article/pii/S1877050916318178
 
 Before publishing as an official personal website, Prof. Verma should review biographical wording, current administrative roles, photograph choice, and any publication/supervision items that should be added or removed.
+
+The official department profile lists Best Teacher Awards in 2018 and 2024. Those dates replace the earlier 2017 date drawn from IRINS; the differing database entry is not counted as an additional award.
