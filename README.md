@@ -1,4 +1,4 @@
-# Prof. Harsh K. Verma — Academic Website
+# Prof. Harsh K Verma — Academic Website
 
 Static academic profile prepared for GitHub Pages.
 
