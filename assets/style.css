@@ -32,7 +32,13 @@ body.dark{color-scheme:dark;--ink:#dbe5f3;--muted:#a7b5ca;--blue:#9bc5f1;--page:
 .citation-value{position:absolute;left:50%;bottom:100%;transform:translateX(-50%);font-size:9px;line-height:20px;color:var(--ink)}
 .citation-year{font-size:9px;color:var(--muted);display:block;padding-top:5px}
 .scholar-updated{font-size:9px;color:var(--muted);margin:20px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:0 3px}
-.scholar-refresh{margin-left:auto;font-size:9px;letter-spacing:.02em}
+.scholar-refresh{margin-left:auto;display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:5px;padding:4px 8px;background:var(--soft);color:var(--blue);font:inherit;font-size:10px;line-height:1.5;cursor:pointer}
+.scholar-refresh svg{width:12px;height:12px;flex-shrink:0}
+.scholar-refresh:hover:not(:disabled){border-color:var(--blue)}
+.scholar-refresh:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.scholar-refresh:disabled{opacity:.65;cursor:wait}
+.scholar-refresh-status{display:block;font-size:10px;color:var(--muted);line-height:1.6}
+.scholar-refresh-status:not(:empty){margin-top:8px}
 @media(max-width:420px){.scholar-surface{padding:22px}.citation-chart{gap:5px}.scholar-surface h2{font-size:21px}}
 
 /* Keep research themes below About, beside the Scholar panel. */

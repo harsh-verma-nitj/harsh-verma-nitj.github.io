@@ -103,57 +103,87 @@
   if (metricsPanel) {
     // Bot commits do not rebuild branch-based Pages. Read the latest committed
     // snapshot directly, while retaining the verified HTML fallback offline.
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 10000);
-    fetch('https://raw.githubusercontent.com/harsh-verma-nitj/harsh-verma-nitj.github.io/main/assets/scholar-metrics.json', {
-      cache: 'no-store', signal: controller.signal
-    }).then(response => {
-      if (!response.ok) throw new Error('Snapshot unavailable');
-      return response.json();
-    }).then(data => {
-      const updated = new Date(data.updated_at);
-      const integer = value => Number.isSafeInteger(value) && value >= 0;
-      const valid = data.profile_id === 'h0edtgIAAAAJ' && !Number.isNaN(updated.getTime()) &&
-        integer(data.recent_since) && data.recent_since >= 2000 &&
-        ['citations', 'h_index', 'i10_index'].every(key =>
-          data.metrics && data.metrics[key] && integer(data.metrics[key].all) &&
-          integer(data.metrics[key].recent) && data.metrics[key].recent <= data.metrics[key].all) &&
-        Array.isArray(data.annual_citations) && data.annual_citations.length > 0 &&
-        data.annual_citations.length <= 8 && data.annual_citations.every((item, i, list) =>
-          integer(item.year) && integer(item.citations) && (i === 0 || item.year > list[i - 1].year));
-      if (!valid) throw new Error('Invalid snapshot');
-      metricsPanel.querySelectorAll('[data-metric]').forEach(cell => {
-        cell.textContent = data.metrics[cell.dataset.metric][cell.dataset.period].toLocaleString('en-US');
+    const refreshButton = document.getElementById('scholar-refresh');
+    const refreshLabel = document.getElementById('scholar-refresh-label');
+    const refreshStatus = document.getElementById('scholar-refresh-status');
+    const snapshot = () => JSON.stringify({
+      values: Array.from(metricsPanel.querySelectorAll('[data-metric]'), cell => cell.textContent),
+      since: document.getElementById('scholar-recent').textContent,
+      updated: document.getElementById('scholar-updated').getAttribute('datetime'),
+      annual: Array.from(document.querySelectorAll('#scholar-chart li'), item => item.getAttribute('aria-label'))
+    });
+    let refreshing = false;
+    const refreshMetrics = (manual = false) => {
+      if (refreshing) return;
+      refreshing = true;
+      const previous = snapshot();
+      refreshButton.disabled = true;
+      refreshButton.setAttribute('aria-busy', 'true');
+      refreshLabel.textContent = 'Refreshing…';
+      if (manual) refreshStatus.textContent = '';
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 10000);
+      return fetch(`https://raw.githubusercontent.com/harsh-verma-nitj/harsh-verma-nitj.github.io/main/assets/scholar-metrics.json?t=${Date.now()}`, {
+        cache: 'no-store', signal: controller.signal
+      }).then(response => {
+        if (!response.ok) throw new Error('Snapshot unavailable');
+        return response.json();
+      }).then(data => {
+        const updated = new Date(data.updated_at);
+        const integer = value => Number.isSafeInteger(value) && value >= 0;
+        const valid = data.profile_id === 'h0edtgIAAAAJ' && !Number.isNaN(updated.getTime()) &&
+          integer(data.recent_since) && data.recent_since >= 2000 &&
+          ['citations', 'h_index', 'i10_index'].every(key =>
+            data.metrics && data.metrics[key] && integer(data.metrics[key].all) &&
+            integer(data.metrics[key].recent) && data.metrics[key].recent <= data.metrics[key].all) &&
+          Array.isArray(data.annual_citations) && data.annual_citations.length > 0 &&
+          data.annual_citations.length <= 8 && data.annual_citations.every((item, i, list) =>
+            integer(item.year) && integer(item.citations) && (i === 0 || item.year > list[i - 1].year));
+        if (!valid) throw new Error('Invalid snapshot');
+        metricsPanel.querySelectorAll('[data-metric]').forEach(cell => {
+          cell.textContent = data.metrics[cell.dataset.metric][cell.dataset.period].toLocaleString('en-US');
+        });
+        document.getElementById('scholar-recent').textContent = `Since ${data.recent_since}`;
+        const time = document.getElementById('scholar-updated');
+        time.dateTime = data.updated_at;
+        time.textContent = updated.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata'});
+        const maximum = Math.max(1, ...data.annual_citations.map(item => item.citations));
+        const fragment = document.createDocumentFragment();
+        data.annual_citations.forEach(item => {
+          const li = document.createElement('li');
+          li.setAttribute('aria-label', `${item.year}: ${item.citations} citations`);
+          const column = document.createElement('span');
+          column.className = 'citation-column';
+          const bar = document.createElement('span');
+          bar.className = 'citation-bar';
+          bar.style.setProperty('--bar-height', `${item.citations / maximum * 100}%`);
+          const value = document.createElement('span');
+          value.className = 'citation-value';
+          value.textContent = item.citations;
+          bar.append(value);
+          column.append(bar);
+          const year = document.createElement('span');
+          year.className = 'citation-year';
+          year.textContent = item.year;
+          li.append(column, year);
+          fragment.append(li);
+        });
+        document.getElementById('scholar-chart').replaceChildren(fragment);
+        if (manual) refreshStatus.textContent = previous === snapshot()
+          ? 'No newer figures are available.' : 'Latest saved figures loaded.';
+      }).catch(() => {
+        // Keep all last-verified values and their actual update date.
+        if (manual) refreshStatus.textContent = 'Could not refresh. Showing the last verified figures.';
+      }).finally(() => {
+        clearTimeout(timer);
+        refreshing = false;
+        refreshButton.disabled = false;
+        refreshButton.setAttribute('aria-busy', 'false');
+        refreshLabel.textContent = 'Refresh';
       });
-      document.getElementById('scholar-recent').textContent = `Since ${data.recent_since}`;
-      const time = document.getElementById('scholar-updated');
-      time.dateTime = data.updated_at;
-      time.textContent = updated.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata'});
-      const maximum = Math.max(1, ...data.annual_citations.map(item => item.citations));
-      const fragment = document.createDocumentFragment();
-      data.annual_citations.forEach(item => {
-        const li = document.createElement('li');
-        li.setAttribute('aria-label', `${item.year}: ${item.citations} citations`);
-        const column = document.createElement('span');
-        column.className = 'citation-column';
-        const bar = document.createElement('span');
-        bar.className = 'citation-bar';
-        bar.style.setProperty('--bar-height', `${item.citations / maximum * 100}%`);
-        const value = document.createElement('span');
-        value.className = 'citation-value';
-        value.textContent = item.citations;
-        bar.append(value);
-        column.append(bar);
-        const year = document.createElement('span');
-        year.className = 'citation-year';
-        year.textContent = item.year;
-        li.append(column, year);
-        fragment.append(li);
-      });
-      document.getElementById('scholar-chart').replaceChildren(fragment);
-    }).catch(() => {
-      // Keep all last-verified values and their actual update date.
-    }).finally(() => clearTimeout(timer));
+    };
+    refreshButton.addEventListener('click', () => refreshMetrics(true));
+    refreshMetrics();
   }
 
   if (/\/(?:index\.html)?$/.test(location.pathname)) {
