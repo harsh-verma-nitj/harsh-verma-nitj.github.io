@@ -27,4 +27,24 @@ The current page references a public profile photograph remotely and automatical
 - Scopus Author ID: 57204684351
 - ResearcherID: Y-4606-2019
 
+## Additional profile material (October 2026)
+
+The website incorporates the owner-supplied current research summary, two sponsored projects, two granted patents, ten consultancy projects, nineteen doctoral records and publication references from the September 2026 academic record. The existing Phase I project remains listed. Exact Dean and Computer Centre appointment dates were added.
+
+Publications can be searched by keyword and filtered by year or type. The list contains 81 distinct, retained references from the supplied record, not a lifetime publication total. All entries remain visible when JavaScript is unavailable; JavaScript adds filtering and pagination.
+
+Editorial corrections retained for future maintenance:
+
+- The supplied SCI-list entry 31 associates an alternative cloud/edge-IoT title with DOI `10.1002/ett.3292`. Wiley identifies that DOI as the lightweight Cloud-IoT crowdsensing authentication article already present as entry 32. Entry 31 is held for clarification and is not published separately. The publisher-confirmed cloud-assisted edge-IoT article (`10.1002/ett.3883`, supplied entry 27) remains listed.
+- The authentication article is listed under the 2019 journal-volume year; Wiley records an initial online publication in February 2018.
+- The supplied cloudlet-completion paper is a Procedia Computer Science proceedings article. Its DOI was corrected to `10.1016/j.procs.2016.08.067` using the Elsevier record and its type is shown as conference paper.
+- The Hadoop/tweets chapter is listed under the supplied citation's 2021 publication year; the conference was ICRIC 2020.
+- Current indexing, journal quartiles and live citation metrics are not inferred from the application form's categories.
+
+Correction sources:
+
+- https://onlinelibrary.wiley.com/doi/abs/10.1002/ett.3292
+- https://onlinelibrary.wiley.com/doi/abs/10.1002/ett.3883
+- https://www.sciencedirect.com/science/article/pii/S1877050916318178
+
 Before publishing as an official personal website, Prof. Verma should review biographical wording, current administrative roles, photograph choice, and any publication/supervision items that should be added or removed.
