@@ -59,3 +59,4 @@ The official department profile lists Best Teacher Awards in 2018 and 2024. Thos
 
 The Head of Computer Science and Engineering appointment shown on the Experience page is dated 1 January 2018–4 February 2020, as recorded in the official CSE faculty profile data (`admin_responsibility`).
 
+The Recognition page includes the owner-supplied award: Best Professor in Computer Engineering, Dewang Mehta Business School Awards, 2013. The NIT Jalandhar Best Teacher Awards for 2018 and 2024 are displayed as separate rows.
