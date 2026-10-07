@@ -33,7 +33,7 @@ The site uses a navy profile header, compact overview cards and seven static pag
 
 ## Profile photo
 
-The portrait is stored locally at `assets/profile.jpg`. It is the official NITJ faculty photograph, downloaded from https://www.nitj.ac.in/images/faculty/16081670370.jpg (894 × 1146 pixels). The original photograph remains in the repository. The displayed version, `assets/profile-maroon.jpg`, replaces the office background with a plain rusty maroon wall, as requested by the owner, using the built-in image editing tool. CSS controls its display and crop. This replaces the former 128 × 128 remotely linked thumbnail.
+The portrait is stored locally at `assets/profile.jpg`. It is the official NITJ faculty photograph, downloaded from https://www.nitj.ac.in/images/faculty/16081670370.jpg (894 × 1146 pixels). The original photograph remains in the repository. The displayed version, `assets/profile-maroon-v2.jpg`, replaces the office background with a plain rusty maroon wall, as requested by the owner, using the built-in image editing tool. The final owner-selected uploaded portrait is used throughout the site. CSS controls its display and crop. This replaces the former 128 × 128 remotely linked thumbnail.
 
 The official CSE profile data also supplies the Google Scholar identifier and the MS (Software Systems, BITS Pilani, 1998) and BE (Computer Science and Engineering, Gulbarga University, 1993) qualifications.
 
