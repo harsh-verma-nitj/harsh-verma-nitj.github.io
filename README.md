@@ -57,5 +57,5 @@ Before publishing as an official personal website, Prof. Verma should review bio
 
 The official department profile lists Best Teacher Awards in 2018 and 2024. Those dates replace the earlier 2017 date drawn from IRINS; the differing database entry is not counted as an additional award.
 
-The Head of Computer Science and Engineering appointments are dated 4 September 2010–4 September 2013 and 1 January 2018–4 February 2020 in the official CSE faculty profile data (`admin_responsibility`). Both terms are shown separately on the Experience page.
+The Head of Computer Science and Engineering appointment shown on the Experience page is dated 1 January 2018–4 February 2020, as recorded in the official CSE faculty profile data (`admin_responsibility`).
 
