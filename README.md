@@ -2,6 +2,16 @@
 
 Static academic profile prepared for GitHub Pages.
 
+## Google Scholar metrics
+
+The homepage displays Google Scholar, IRINS / Vidwan, ORCID, Scopus and Web of Science links, plus the citation, h-index and i10-index table and annual citation chart from Scholar profile `h0edtgIAAAAJ`. The recent-period heading is read from Scholar, so it can roll forward each year.
+
+`.github/workflows/update-scholar.yml` fetches the public profile once daily and can also be run manually from Actions. The standard-library Python updater validates the author and the complete metrics before atomically saving `assets/scholar-metrics.json`. Failed or blocked requests leave the last successful snapshot intact. The update date always refers to a successful fetch, rather than a page visit.
+
+The homepage requests that JSON from the repository's raw URL because a commit made with `GITHUB_TOKEN` does not trigger a branch-based GitHub Pages build. Its embedded HTML snapshot remains visible if JavaScript or the JSON request is unavailable. No Scholar credentials, proxy or browser scraping service is used. Google Scholar may restrict automated requests; failed refreshes are reported in the Actions run. GitHub may disable scheduled workflows after 60 days of repository inactivity; re-enable the schedule in Actions if needed.
+
+Run the integrity checks with `python3 -m unittest discover -s tests -v` and refresh manually with `python3 scripts/update_scholar.py`.
+
 ## Publish on GitHub Pages
 
 Website address: https://harsh-verma-nitj.github.io/

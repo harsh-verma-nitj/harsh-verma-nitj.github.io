@@ -1,0 +1,41 @@
+name: Refresh Google Scholar metrics
+
+on:
+  schedule:
+    - cron: '17 2 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-scholar.yml'
+      - 'scripts/update_scholar.py'
+      - 'tests/test_scholar.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scholar-metrics
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Check the parser and failure handling
+        run: python3 -m unittest discover -s tests -v
+      - name: Fetch public Google Scholar metrics
+        run: python3 scripts/update_scholar.py
+      - name: Save the successful snapshot
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/scholar-metrics.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Refresh Google Scholar citation metrics'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

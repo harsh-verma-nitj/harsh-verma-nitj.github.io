@@ -10,3 +10,27 @@ body.dark{color-scheme:dark;--ink:#dbe5f3;--muted:#a7b5ca;--blue:#9bc5f1;--page:
 .cards+.cards{margin-top:15px}
 .qualification+.qualification{margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}.qualification-year{display:grid;place-items:center;background:var(--soft);width:52px;height:52px;border-radius:9px;color:var(--blue);font-size:12px;font-weight:600;flex-shrink:0}
 .hero-portrait,.side-portrait{object-position:center top}.hero-profile-links{flex-wrap:wrap}
+/* Scholarly profiles and the last verified Google Scholar snapshot. */
+.scholar-surface h2{font-size:23px;margin-bottom:18px}
+.research-profiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:23px}
+.research-profiles a{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 11px;background:var(--soft);border:1px solid var(--line);border-radius:6px;color:var(--blue);font-size:11px;font-weight:600;text-decoration:none}
+.research-profiles a:hover,.research-profiles a:focus-visible{border-color:var(--blue)}
+.research-profiles svg{width:13px;height:13px;flex-shrink:0}
+.scholar-table{width:100%;border-collapse:collapse;font-size:12px;min-width:0}
+.scholar-table caption{text-align:left;color:var(--ink);font-weight:600;font-size:13px;padding-bottom:9px}
+.scholar-table th,.scholar-table td{padding:8px 3px;border-bottom:1px solid var(--line)}
+.scholar-table thead th{font-size:10px;color:var(--muted);font-weight:500}
+.scholar-table th:first-child{text-align:left}
+.scholar-table td,.scholar-table th:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
+.scholar-table tbody th{font-weight:500;color:var(--ink)}
+.scholar-table tbody td{font-weight:600;color:var(--ink)}
+.citation-chart-heading{font-size:11px;font-weight:600;color:var(--muted);margin:20px 0 22px}
+.citation-chart{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;list-style:none;padding:0;margin:0}
+.citation-chart li{text-align:center;min-width:0}
+.citation-column{height:75px;display:flex;align-items:flex-end;justify-content:center;border-bottom:1px solid var(--line)}
+.citation-bar{display:block;position:relative;width:65%;height:var(--bar-height);min-height:1px;max-width:28px;background:var(--blue);border-radius:2px 2px 0 0;opacity:.83}
+.citation-value{position:absolute;left:50%;bottom:100%;transform:translateX(-50%);font-size:9px;line-height:20px;color:var(--ink)}
+.citation-year{font-size:9px;color:var(--muted);display:block;padding-top:5px}
+.scholar-updated{font-size:9px;color:var(--muted);margin:20px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:0 3px}
+.scholar-refresh{margin-left:auto;font-size:9px;letter-spacing:.02em}
+@media(max-width:420px){.scholar-surface{padding:22px}.citation-chart{gap:5px}.scholar-surface h2{font-size:21px}}
