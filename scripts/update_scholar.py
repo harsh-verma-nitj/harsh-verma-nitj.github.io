@@ -76,13 +76,18 @@ def parse_metrics(html, updated_at=None):
     }
 
 
-def refresh(output=OUTPUT, opener=urllib.request.urlopen):
+def fetch_metrics(opener=urllib.request.urlopen):
+    """Fetch and validate Scholar directly, without reading a saved snapshot."""
     request = urllib.request.Request(SOURCE, headers={"User-Agent": "Mozilla/5.0"})
     with opener(request, timeout=30) as response:
         if response.status != 200:
             raise ValueError(f"Google Scholar returned HTTP {response.status}")
         html = response.read(2_000_000).decode("utf-8")
-    data = parse_metrics(html)
+    return parse_metrics(html)
+
+
+def refresh(output=OUTPUT, opener=urllib.request.urlopen):
+    data = fetch_metrics(opener)
     # Validate the complete response before touching the existing file.
     temporary = output.with_suffix(".json.tmp")
     temporary.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")

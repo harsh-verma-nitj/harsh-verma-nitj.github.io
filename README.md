@@ -36,9 +36,11 @@ The navigation and footer are copied into each HTML file. The profile sidebar is
 
 ## Citation figures
 
-The homepage reads the saved figures in [assets/scholar-metrics.json](assets/scholar-metrics.json). Its **Refresh** button loads the latest saved figures; it does not fetch Google Scholar directly.
+The homepage initially displays the last verified figures from [assets/scholar-metrics.json](assets/scholar-metrics.json). **Refresh** requests current figures through the live API, once its URL is set in [assets/scholar-config.json](assets/scholar-config.json). Every click makes a new Scholar request; successful checks update the table, chart and date. Failed checks preserve the verified figures and show a failure message.
 
-[scripts/update_scholar.py](scripts/update_scholar.py) updates the snapshot from the public Scholar profile. The [Scholar workflow](.github/workflows/update-scholar.yml) runs daily and can be run manually from the repository's Actions tab. If Scholar blocks a request, the last saved figures and their date remain available.
+[server/README.md](server/README.md) explains how to host and connect the API. It is not deployed yet: `live_endpoint` is empty, and the button reports that live refresh is not connected. GitHub Pages hosts the HTML and assets but cannot run this Python service.
+
+[scripts/update_scholar.py](scripts/update_scholar.py) also updates the saved snapshot. The [Scholar workflow](.github/workflows/update-scholar.yml) runs daily and can be run manually from the repository's Actions tab. Scholar returned HTTP 403 to the GitHub runner on 7 and 8 October 2026. A direct fetch on 8 October succeeded. The live API must be tested from its chosen host because Scholar can refuse requests from that host too.
 
 ## Local preview
 
@@ -53,5 +55,7 @@ Open `http://localhost:8000`. No build step is required.
 The Scholar updater checks can be run with:
 
 ```sh
+python3 -m pip install -r server/requirements.txt
 python3 -m unittest discover -s tests -v
+node tests/test_refresh.js
 ```
