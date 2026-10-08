@@ -6,7 +6,7 @@ Personal faculty website for Harsh K Verma, Professor, Dr B. R. Ambedkar Nationa
 
 ## Edit a page
 
-Each page has its own HTML file. Open a file below, click the pencil icon (**Edit this file**), make the change, then choose **Commit changes**. Changes saved to `main` publish through GitHub Pages.
+Each page has its own HTML file. Sign in to GitHub with an account that has write access to this repository. Open a file below, click the pencil icon (**Edit this file**), make the change, then choose **Commit changes**. Changes saved to `main` publish through GitHub Pages.
 
 | Page         | Source file                            | Contents                                                                 |
 | ------------ | -------------------------------------- | ------------------------------------------------------------------------ |
