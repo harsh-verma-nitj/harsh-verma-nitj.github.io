@@ -4,6 +4,20 @@ This service fetches the public Harsh K Verma Google Scholar profile on every re
 
 ## Deploy
 
+### Render setup
+
+The repository includes [render.yaml](../render.yaml) for one free Docker web service, named `harsh-verma-scholar-refresh`. It sets the health check and website origin automatically. The faculty website stays on GitHub Pages.
+
+[Deploy the Scholar API on Render](https://render.com/deploy?repo=https%3A%2F%2Fgithub.com%2Fharsh-verma-nitj%2Fharsh-verma-nitj.github.io)
+
+Sign in to your Render account and review the service before deployment. Keep the **Free** compute plan. This setup creates no database or paid service. Account sign-up, terms acceptance and any payment-method request must be handled by the account owner.
+
+Free instances sleep after 15 minutes without traffic and can take about a minute to restart. The Refresh button allows up to two minutes for the request. Auto-deploy is off; after future backend changes, deploy the latest commit from Render's dashboard.
+
+After deployment, copy the actual public service URL from Render. Test its `/api/scholar-metrics` endpoint before connecting the button as described below. Do not guess the URL from the service name.
+
+### Other hosts
+
 Use a Python or Docker host that provides a public HTTPS URL. Keep the website on GitHub Pages.
 
 For a Python service, use the repository root as the working directory:

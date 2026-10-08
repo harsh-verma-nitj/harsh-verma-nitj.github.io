@@ -1,0 +1,15 @@
+# Deploy only the Scholar API. The faculty website remains on GitHub Pages.
+services:
+  - type: web
+    name: harsh-verma-scholar-refresh
+    runtime: docker
+    plan: free
+    repo: https://github.com/harsh-verma-nitj/harsh-verma-nitj.github.io
+    branch: main
+    dockerfilePath: ./server/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeployTrigger: off
+    envVars:
+      - key: SITE_ORIGIN
+        value: https://harsh-verma-nitj.github.io

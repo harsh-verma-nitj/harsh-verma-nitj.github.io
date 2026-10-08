@@ -173,9 +173,10 @@
       refreshLabel.textContent = "Refreshing…";
       if (manual) refreshStatus.textContent = "";
       const controller = new AbortController();
+      // Allow time for a free backend instance to wake up before fetching Scholar.
       const timer = setTimeout(
         () => controller.abort(),
-        manual ? 45000 : 10000,
+        manual ? 120000 : 10000,
       );
       try {
         const options = { cache: "no-store", signal: controller.signal };

@@ -40,6 +40,8 @@ The homepage initially displays the last verified figures from [assets/scholar-m
 
 [server/README.md](server/README.md) explains how to host and connect the API. It is not deployed yet: `live_endpoint` is empty, and the button reports that live refresh is not connected. GitHub Pages hosts the HTML and assets but cannot run this Python service.
 
+The [Render setup](render.yaml) defines a free service with the required settings. [Deploy the Scholar API](https://render.com/deploy?repo=https%3A%2F%2Fgithub.com%2Fharsh-verma-nitj%2Fharsh-verma-nitj.github.io) in your Render account, then connect its verified HTTPS endpoint. Free instances can take about a minute to wake up after being idle.
+
 [scripts/update_scholar.py](scripts/update_scholar.py) also updates the saved snapshot. The [Scholar workflow](.github/workflows/update-scholar.yml) runs daily and can be run manually from the repository's Actions tab. Scholar returned HTTP 403 to the GitHub runner on 7 and 8 October 2026. A direct fetch on 8 October succeeded. The live API must be tested from its chosen host because Scholar can refuse requests from that host too.
 
 ## Local preview
