@@ -1,76 +1,57 @@
-# Prof. Harsh K Verma — Academic Website
+# Harsh K Verma
 
-Static academic profile prepared for GitHub Pages.
+Personal faculty website for Harsh K Verma, Professor, Dr B. R. Ambedkar National Institute of Technology Jalandhar.
 
-## Google Scholar metrics
+[View the website](https://harsh-verma-nitj.github.io/)
 
-The homepage displays Google Scholar, IRINS / Vidwan, ORCID, Scopus and Web of Science links, plus the citation, h-index and i10-index table and annual citation chart from Scholar profile `h0edtgIAAAAJ`. The recent-period heading is read from Scholar, so it can roll forward each year.
+## Edit a page
 
-The Refresh button reloads the newest saved snapshot without reloading the page. It shows a loading state and reports unchanged figures or a failed request while retaining the last verified data and date. It does not bypass Scholar restrictions or trigger a fresh scrape from the visitor's browser.
+Each page has its own HTML file. Open a file below, click the pencil icon (**Edit this file**), make the change, then choose **Commit changes**. Changes saved to `main` publish through GitHub Pages.
 
-`.github/workflows/update-scholar.yml` fetches the public profile once daily and can also be run manually from Actions. The standard-library Python updater validates the author and the complete metrics before atomically saving `assets/scholar-metrics.json`. Failed or blocked requests leave the last successful snapshot intact. The update date always refers to a successful fetch, rather than a page visit.
+| Page         | Source file                            | Contents                                                                 |
+| ------------ | -------------------------------------- | ------------------------------------------------------------------------ |
+| Home         | [index.html](index.html)               | Name, designation, portrait, About, research themes and citation figures |
+| Experience   | [experience.html](experience.html)     | Teaching experience, positions held and qualifications                   |
+| Research     | [research.html](research.html)         | Research interests, projects, patents and consultancy                    |
+| Publications | [publications.html](publications.html) | Books, book chapters, journal articles and conference papers             |
+| Supervision  | [supervision.html](supervision.html)   | Doctoral supervision records                                             |
+| Recognition  | [service.html](service.html)           | Awards and professional memberships                                      |
+| Contact      | [contact.html](contact.html)           | Email, office address, phone and research profile links                  |
 
-The homepage requests that JSON from the repository's raw URL because a commit made with `GITHUB_TOKEN` does not trigger a branch-based GitHub Pages build. Its embedded HTML snapshot remains visible if JavaScript or the JSON request is unavailable. No Scholar credentials, proxy or browser scraping service is used. Google Scholar may restrict automated requests; failed refreshes are reported in the Actions run. GitHub may disable scheduled workflows after 60 days of repository inactivity; re-enable the schedule in Actions if needed.
+The HTML is indented, with comments marking the main sections. Search for the heading or existing text to find the part you want to change. Edit the text between tags, keeping the tags in place. For example:
 
-The initial hosted run on 7 October 2026 passed the integrity checks but received HTTP 403 from Google Scholar. The homepage retains the snapshot successfully fetched on that date; scheduled checks are configured, but successful unattended refreshes have not yet been demonstrated.
+```html
+<h2>Research Interests</h2>
+```
 
-Run the integrity checks with `python3 -m unittest discover -s tests -v` and refresh manually with `python3 scripts/update_scholar.py`.
+On the Publications page, each article is an `<article class="publication">` block. When adding a journal article or conference paper, update its `data-year` and `data-type` attributes so the filters work. Add a matching year option if that year is not already in the dropdown. Books and book chapters are in the separate section at the top.
 
-## Publish on GitHub Pages
+## Appearance and shared elements
 
-Website address: https://harsh-verma-nitj.github.io/
+- [assets/style.css](assets/style.css): colours, fonts, spacing, portrait crops and mobile layout.
+- [assets/script.js](assets/script.js): navigation, dark mode, publication filters and citation refresh.
+- [assets/profile-maroon-v2.jpg](assets/profile-maroon-v2.jpg): the portrait displayed on every page.
 
-The site files are in the repository root. To enable publishing:
+The navigation and footer are copied into each HTML file. The profile sidebar is copied into the six inner pages. Apply changes to those shared elements in each relevant file.
 
-1. Open this repository's **Settings → Pages**.
-2. Under **Build and deployment**, select **Deploy from a branch**.
-3. Select branch **main** and folder **/(root)**, then click **Save**.
-4. Wait for GitHub's Pages deployment to complete.
+## Citation figures
 
-Changes committed to `main` are then published automatically. No build command or external hosting is required.
+The homepage reads the saved figures in [assets/scholar-metrics.json](assets/scholar-metrics.json). Its **Refresh** button loads the latest saved figures; it does not fetch Google Scholar directly.
 
-## Design and navigation
+[scripts/update_scholar.py](scripts/update_scholar.py) updates the snapshot from the public Scholar profile. The [Scholar workflow](.github/workflows/update-scholar.yml) runs daily and can be run manually from the repository's Actions tab. If Scholar blocks a request, the last saved figures and their date remain available.
 
-The site uses a navy profile header, compact overview cards and seven static pages: Home, Experience, Research, Publications, Supervision, Recognition and Contact. It supports mobile navigation and a user-selectable dark theme. All supplied academic records remain on their relevant pages. Old homepage section anchors redirect to the corresponding page.
+## Local preview
 
-## Profile photo
+From the repository folder, run:
 
-The portrait is stored locally at `assets/profile.jpg`. It is the official NITJ faculty photograph, downloaded from https://www.nitj.ac.in/images/faculty/16081670370.jpg (894 × 1146 pixels). The original photograph remains in the repository. The displayed version, `assets/profile-maroon-v2.jpg`, replaces the office background with a plain rusty maroon wall, as requested by the owner, using the built-in image editing tool. The final owner-selected uploaded portrait is used throughout the site. CSS controls its display and crop. This replaces the former 128 × 128 remotely linked thumbnail.
+```sh
+python3 -m http.server 8000
+```
 
-The official CSE profile data also supplies the Google Scholar identifier and the MS (Software Systems, BITS Pilani, 1998) and BE (Computer Science and Engineering, Gulbarga University, 1993) qualifications.
+Open `http://localhost:8000`. No build step is required.
 
-## Main sources used
+The Scholar updater checks can be run with:
 
-- Official NIT Jalandhar CSE faculty profile: https://departments.nitj.ac.in/dept/cse/Faculty/6430445438bff038a7805712
-- NITJ IRINS/Vidwan: https://nitj.irins.org/profile/90371
-- ORCID: https://orcid.org/0000-0003-4826-6150
-- Scopus Author ID: 57204684351
-- ResearcherID: Y-4606-2019
-
-## Additional profile material (October 2026)
-
-The website incorporates the owner-supplied current research summary, two sponsored projects, two granted patents, ten consultancy projects, nineteen doctoral records and publication references from the September 2026 academic record. The existing Phase I project remains listed. Exact Dean and Computer Centre appointment dates were added.
-
-Publications can be searched by keyword and filtered by year or type. The list contains 81 distinct, retained references from the supplied record, not a lifetime publication total. All entries remain visible when JavaScript is unavailable; JavaScript adds filtering and pagination.
-
-Editorial corrections retained for future maintenance:
-
-- The supplied SCI-list entry 31 associates an alternative cloud/edge-IoT title with DOI `10.1002/ett.3292`. Wiley identifies that DOI as the lightweight Cloud-IoT crowdsensing authentication article already present as entry 32. Entry 31 is held for clarification and is not published separately. The publisher-confirmed cloud-assisted edge-IoT article (`10.1002/ett.3883`, supplied entry 27) remains listed.
-- The authentication article is listed under the 2019 journal-volume year; Wiley records an initial online publication in February 2018.
-- The supplied cloudlet-completion paper is a Procedia Computer Science proceedings article. Its DOI was corrected to `10.1016/j.procs.2016.08.067` using the Elsevier record and its type is shown as conference paper.
-- The Hadoop/tweets chapter is listed under the supplied citation's 2021 publication year; the conference was ICRIC 2020.
-- Current indexing, journal quartiles and live citation metrics are not inferred from the application form's categories.
-
-Correction sources:
-
-- https://onlinelibrary.wiley.com/doi/abs/10.1002/ett.3292
-- https://onlinelibrary.wiley.com/doi/abs/10.1002/ett.3883
-- https://www.sciencedirect.com/science/article/pii/S1877050916318178
-
-Before publishing as an official personal website, Prof. Verma should review biographical wording, current administrative roles, photograph choice, and any publication/supervision items that should be added or removed.
-
-The official department profile lists Best Teacher Awards in 2018 and 2024. Those dates replace the earlier 2017 date drawn from IRINS; the differing database entry is not counted as an additional award.
-
-The Head of Computer Science and Engineering appointment shown on the Experience page is dated 1 January 2018–4 February 2020, as recorded in the official CSE faculty profile data (`admin_responsibility`).
-
-The Recognition page includes the owner-supplied award: Best Professor in Computer Engineering, Dewang Mehta Business School Awards, 2013. The NIT Jalandhar Best Teacher Awards for 2018 and 2024 are displayed as separate rows.
+```sh
+python3 -m unittest discover -s tests -v
+```
