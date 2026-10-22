@@ -1,12 +1,12 @@
 {
   "profile_id": "h0edtgIAAAAJ",
   "source": "https://scholar.google.com/citations?hl=en&user=h0edtgIAAAAJ",
-  "updated_at": "2026-10-18T02:40:47+00:00",
+  "updated_at": "2026-10-22T02:42:43+00:00",
   "recent_since": 2021,
   "metrics": {
     "citations": {
-      "all": 2627,
-      "recent": 1514
+      "all": 2626,
+      "recent": 1515
     },
     "h_index": {
       "all": 29,
@@ -44,11 +44,11 @@
     },
     {
       "year": 2025,
-      "citations": 265
+      "citations": 264
     },
     {
       "year": 2026,
-      "citations": 132
+      "citations": 135
     }
   ]
 }
