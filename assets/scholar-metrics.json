@@ -1,20 +1,20 @@
 {
   "profile_id": "h0edtgIAAAAJ",
   "source": "https://scholar.google.com/citations?hl=en&user=h0edtgIAAAAJ",
-  "updated_at": "2026-11-06T02:57:35+00:00",
+  "updated_at": "2026-11-19T10:19:37+00:00",
   "recent_since": 2021,
   "metrics": {
     "citations": {
-      "all": 2637,
-      "recent": 1521
+      "all": 2649,
+      "recent": 1533
     },
     "h_index": {
       "all": 29,
       "recent": 23
     },
     "i10_index": {
-      "all": 77,
-      "recent": 44
+      "all": 78,
+      "recent": 45
     }
   },
   "annual_citations": [
@@ -32,15 +32,15 @@
     },
     {
       "year": 2022,
-      "citations": 286
+      "citations": 287
     },
     {
       "year": 2023,
-      "citations": 316
+      "citations": 315
     },
     {
       "year": 2024,
-      "citations": 288
+      "citations": 287
     },
     {
       "year": 2025,
@@ -48,7 +48,7 @@
     },
     {
       "year": 2026,
-      "citations": 139
+      "citations": 148
     }
   ]
 }
